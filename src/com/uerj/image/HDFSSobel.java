@@ -129,12 +129,12 @@ public class HDFSSobel {
 
 		if (args.length < 2) {
 			System.out
-					.println("Not enough arguments! Please provide input path and output path.");
+					.println("Numero de argumentos não suficiente! Informe input_path e output_path.");
 			System.exit(0);
 		}
 
 		JobConf conf = new JobConf(HDFSSobel.class);
-		conf.setJobName("hadoop_fast_bf");
+		conf.setJobName("hadoop_sobel_filter");
 		String outputPath = String.valueOf(args[1]);
 		if (args.length == 4) {
 			conf.setFloat("sigma_r", Float.valueOf(args[3]));
@@ -158,7 +158,7 @@ public class HDFSSobel {
 		conf.setOutputFormat(MyOutputFormat.class);
 
 		conf.set("mapred.reduce.child.java.opts", "-Xmx1024m");
-		conf.set("mapred.tasktracker.map.tasks.maximum", "2");
+		//conf.set("mapred.tasktracker.map.tasks.maximum", "2");
 
 		FileInputFormat.setInputPaths(conf, new Path(args[0]));
 		FileOutputFormat.setOutputPath(conf, new Path(args[1]));
